@@ -51,7 +51,7 @@ def Update():
     else:
         return "Error"
 
-@ruta_pago.route('/deletepago/<id>', methods=['GET'])
+@ruta_pago.route('/deletepago/<id>', methods=['DELETE'])
 def eliminar(id):
     pago = pago.query.get(id)
     db.session.delete(pago_schema)

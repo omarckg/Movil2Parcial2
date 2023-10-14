@@ -44,7 +44,7 @@ def Update():
     else:
         return "Error"
     
-@ruta_Reporte.route("/deleteReporte/<id>", methods=["GET"])
+@ruta_Reporte.route("/deleteReporte/<id>", methods=["DELETE"])
 def eliminar(id):
     reporte = Reporte.query.get(id)
     db.session.delete(reporte)
