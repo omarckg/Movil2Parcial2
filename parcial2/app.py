@@ -1,10 +1,11 @@
 from flask import Flask, jsonify,json
 from config.db import  db, ma, app
-from api.vehiculo import Vehiculo, VehiculosSchema
 from api.pasajero import Pasajero, PasajerosSchema
-from api.solicitud import Solicitud, SolicitudesSchema
-from api.reporte import Reporte, ReportesSchema
+from api.vehiculo import Vehiculo, VehiculosSchema
 from api.viajes import Viaje, ViajesSchema
+from api.solicitud import Solicitud, SolicitudesSchema
+from api.pago import Pago, PagosSchema
+from api.reporte import Reporte, ReportesSchema
 
 #app.register_blueprint(ruta_Vehiculo,url_prefix = '/api')
 #app.register_blueprint(ruta_pasajeros, url_prefix = '/api')

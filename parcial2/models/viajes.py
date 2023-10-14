@@ -1,11 +1,11 @@
 from config.db import db, ma, app
 
 class Viaje(db.Model):
-    __tablename__ = "tblsolicitud"
+    __tablename__ = "tblviaje"
 
     id = db.Column(db.Integer, primary_key=True)
     idpasajero = db.Column(db.Integer, db.ForeignKey('tblpasajero.id'))
-    idvehiculo = db.Column(db.Integer, db.ForeignKey('tblvehiculos.id'))
+    idvehiculo = db.Column(db.Integer, db.ForeignKey('tblvehiculo.id'))
     Hora_inicio = db.Column(db.String(50))
     Hora_fin = db.Column(db.String(50))
     trayecto = db.Column(db.String(50))
