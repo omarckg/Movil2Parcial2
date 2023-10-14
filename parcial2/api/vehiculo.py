@@ -15,9 +15,15 @@ def vehiculo():
 
 @ruta_Vehiculo.route("/saveVehiculo", methods=["POST"])
 def save():
+<<<<<<< HEAD
     placa = request.json[" placa"]
     estado = request.json[" estado"]
     capacidad = request.json[" capacidad"]
+=======
+    placa = request.json["placa"]
+    estado = request.json["estado"]
+    capacidad = request.json["capacidad"]
+>>>>>>> fc5120fc25ae0cb06f86cc302c62e9dc9d6b1d29
     new_Vehiculo = Vehiculo(
         placa,
         estado,
@@ -30,8 +36,8 @@ def save():
 @ruta_Vehiculo.route("/updateVehiculo", methods=["PUT"])
 def Update():
     id = request.json["id"]
-    placa = request.json["id_aerolinea"]
-    estado= request.json["modelo_avion"]
+    placa = request.json["placa"]
+    estado= request.json["estado"]
     capacidad = request.json["capacidad"]
     vehiculo= Vehiculo.query.get(id)
     if vehiculo:
@@ -44,7 +50,7 @@ def Update():
     else:
         return "Error"
     
-@ruta_Vehiculo.route("/deleteVehiculo/<id>", methods=["GET"])
+@ruta_Vehiculo.route("/deleteVehiculo/<id>", methods=["DELETE"])
 def eliminar(id):
     vehiculo = Vehiculo.query.get(id)
     db.session.delete(vehiculo)

@@ -51,7 +51,7 @@ def Update():
     else:
         return "Error"
 
-@ruta_solicitud.route('/deletesolicitud/<id>', methods=['GET'])
+@ruta_solicitud.route('/deletesolicitud/<id>', methods=['DELETE'])
 def eliminar(id):
     solicitud = solicitud.query.get(id)
     db.session.delete(solicitud)
