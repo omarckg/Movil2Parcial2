@@ -1,7 +1,7 @@
 from config.db import  db, ma, app
 
 class Reporte(db.Model):
-    __tablename__ = "tblvehiculo"
+    __tablename__ = "tblreporte"
 
     id = db.Column(db.Integer, primary_key=True)
     id_viaje = db.Column(db.Integer, db.ForeignKey('tblviaje.id'))
