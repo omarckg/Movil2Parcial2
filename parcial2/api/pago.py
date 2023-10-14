@@ -10,7 +10,7 @@ Pagos_schema = PagosSchema(many=True)
 @ruta_pago.route('/pagos', methods=['GET'])
 def pago():
     resultall = Pago.query.all() # Select * from Pasajeros
-    resultado_solicitud = Pagos_schema.dump(resultall)
+    resultado_pago = Pagos_schema.dump(resultall)
     return jsonify(resultado_pago)
 
 @ruta_pago.route('/savepago', methods=['POST'])
