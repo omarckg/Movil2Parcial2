@@ -10,7 +10,7 @@ solicitudes_schema = SolicitudesSchema(many=True)
 @ruta_solicitud.route('/solicitudes', methods=['GET'])
 def solicitud():
     resultall = Solicitud.query.all() # Select * from Pasajeros
-    resultado_solicitud = solicitudes_Schema.dump(resultall)
+    resultado_solicitud = solicitudes_schema.dump(resultall)
     return jsonify(resultado_solicitud)
 
 @ruta_solicitud.route('/savesolicitud', methods=['POST'])
