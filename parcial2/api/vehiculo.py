@@ -17,7 +17,7 @@ def vehiculo():
 def save():
     placa = request.json[" placa"]
     estado = request.json[" estado"]
-    capacidad = request.json[" capacidad"]
+    capacidad = request.json[" capacidades"]
     new_Vehiculo = Vehiculo(
         placa,
         estado,
