@@ -1,0 +1,23 @@
+from config.db import db, ma, app
+
+class Pasajero(db.Model):
+    __tablename__ = "tblpasajero"
+
+    id = db.Column(db.Integer, primary_key=True)
+    idvehiculo = db.Column(db.Integer, db.ForeignKey('tblvehiculo.id'))
+    nombre = db.Column(db.String(50))
+    telefono = db.Column(db.String(50))
+    ubicacion = db.Column(db.String(50))
+
+    def __init__(self,idvehiculo, nombre, telefono, ubicacion):
+        self.idvehiculo = idvehiculo
+        self.nombre = nombre
+        self.telefono = telefono
+        self.ubicacion = ubicacion
+
+with app.app_context():
+    db.create_all()
+
+class PasajerosSchema(ma.Schema):
+    class Meta:
+        fields = ('id','idvehiculo', 'nombre', 'telefono','ubicacion')
