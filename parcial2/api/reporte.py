@@ -15,13 +15,13 @@ def reporte():
 
 @ruta_Reporte.route("/saveReporte", methods=["POST"])
 def save():
-    placa = request.json[" placa"]
-    estado = request.json[" estado"]
-    capacidad = request.json[" capacidades"]
+    idviaje = request.json["idviaje"]
+    idpago = request.json["idpago"]
+    fecha = request.json[" fecha"]
     new_Reporte = Reporte(
-        placa,
-        estado,
-        capacidad,
+        idviaje,
+        idpago,
+         fecha,
     )
     db.session.add(new_Reporte)
     db.session.commit()
@@ -30,15 +30,15 @@ def save():
 @ruta_Reporte.route("/updateReporte", methods=["PUT"])
 def Update():
     id = request.json["id"]
-    placa = request.json["id_aerolinea"]
-    estado= request.json["modelo_avion"]
-    capacidad = request.json["capacidad"]
+    idviaje = request.json["idviaje"]
+    idpago= request.json["idpago"]
+    fecha = request.json["fecha"]
     reporte= Reporte.query.get(id)
     if reporte:
         print(reporte)
-        reporte.placa = placa
-        reporte.estado = estado
-        reporte.capacidad = capacidad
+        reporte.idviaje = idviaje
+        reporte.idpago = idpago
+        reporte.fecha = fecha
         db.session.commit()
         return "Datos actualizado con exitos"
     else:
