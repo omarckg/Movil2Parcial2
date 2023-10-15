@@ -19,7 +19,7 @@ def save():
     punto_origen = request.json['punto_origen']
     hora = request.json['hora']
     punto_final = request.json['punto_final']
-    new_solicitud = solicitud(
+    new_solicitud = Solicitud(
         idpasajero,
         punto_origen,
         hora,
@@ -35,10 +35,10 @@ def Update():
     id = request.json['id']
     idpasajero = request.json['idpasajero']
     punto_origen = request.json['punto_origen']
-    Hora = request.json['Hora']
+    Hora = request.json['hora']
     punto_final = request.json['punto_final']
     
-    solicitud = solicitud.query.get(id)
+    solicitud = Solicitud.query.get(id)
     if solicitud:
         print(solicitud)
         solicitud.idpasajero = idpasajero
@@ -53,7 +53,7 @@ def Update():
 
 @ruta_solicitud.route('/deletesolicitud/<id>', methods=['DELETE'])
 def eliminar(id):
-    solicitud = solicitud.query.get(id)
+    solicitud = Solicitud.query.get(id)
     db.session.delete(solicitud)
     db.session.commit()
     return jsonify(

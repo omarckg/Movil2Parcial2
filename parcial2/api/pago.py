@@ -19,7 +19,7 @@ def save():
     fecha = request.json['fecha']
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
-    new_pago = pago(
+    new_pago = Pago(
         idpasajero,
         fecha,
         monto,
@@ -30,7 +30,7 @@ def save():
     db.session.commit()
     return "Datos guardados con éxito"
 
-@ruta_pago.route('/updatesolicitud', methods=['PUT'])
+@ruta_pago.route('/updatepago', methods=['PUT'])
 def Update():
     id = request.json['id']
     idpasajero = request.json['idpasajero']
@@ -38,7 +38,7 @@ def Update():
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
     
-    pago = pago.query.get(id)
+    pago = Pago.query.get(id)
     if pago:
         print(pago)
         pago.idpasajero = idpasajero
@@ -53,7 +53,7 @@ def Update():
 
 @ruta_pago.route('/deletepago/<id>', methods=['DELETE'])
 def eliminar(id):
-    pago = pago.query.get(id)
+    pago = Pago.query.get(id)
     db.session.delete(pago_schema)
     db.session.commit()
     return jsonify(

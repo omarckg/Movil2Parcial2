@@ -17,7 +17,7 @@ def reporte():
 def save():
     idviaje = request.json["idviaje"]
     idpago = request.json["idpago"]
-    fecha = request.json[" fecha"]
+    fecha = request.json["fecha"]
     new_Reporte = Reporte(
         idviaje,
         idpago,

@@ -17,10 +17,10 @@ def viaje():
 def save():
     idpasajero = request.json['idpasajero']
     idvehiculo = request.json['idvehiculo']
-    hora_inicio = request.json[" hora_inicio"]
-    Hora_fin= request.json[" hora_fin"]
-    trayecto = request.json[" trayecto"]
-    new_viaje= viaje(
+    hora_inicio = request.json["hora_inicio"]
+    Hora_fin= request.json["hora_fin"]
+    trayecto = request.json["trayecto"]
+    new_viaje= Viaje (
         idpasajero,
         idvehiculo,
         hora_inicio,
@@ -39,7 +39,7 @@ def Update():
     hora_inicio = request.json[" hora_inicio"]
     hora_fin= request.json[" hora_fin"]
     trayecto = request.json[" trayecto"]
-    viaje= Viaje.query.get(id)
+    viaje = Viaje.query.get(id)
     if viaje:
         print(viaje)
         viaje.idpasajero = idpasajero
@@ -52,7 +52,7 @@ def Update():
     else:
         return "Error"
     
-@ruta_Viaje.route("/deleteReporte/<id>", methods=["DELETE"])
+@ruta_Viaje.route("/deleteviaje/<id>", methods=["DELETE"])
 def eliminar(id):
     viaje = Viaje.query.get(id)
     db.session.delete(viaje)
