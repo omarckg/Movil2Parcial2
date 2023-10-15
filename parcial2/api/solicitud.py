@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from config.db import db, app, ma
 from models.solicitud import Solicitud, SolicitudesSchema
+from models.pasajero import Pasajero, PasajerosSchema
 
 ruta_solicitud = Blueprint("ruta_solicitud",__name__)
 
@@ -29,6 +30,20 @@ def save():
     db.session.add(new_solicitud)
     db.session.commit()
     return "Datos guardados con éxito"
+
+@ruta_solicitud.route('/Relacionsolicitud', methods=['POST'])
+def dostabla():
+    datos = {}
+    resultado = db.session.query(Pasajero,Solicitud). \
+        select_from(Pasajero).join(Solicitud).all()
+    i=0
+    for pasajero, solicitud in resultado:
+        i+=1
+        datos[i]={
+            'pasajero':pasajero.id,
+            'solicitud': solicitud.idpasajero, 
+        }
+    return datos
 
 @ruta_solicitud.route('/updatesolicitud', methods=['PUT'])
 def Update():

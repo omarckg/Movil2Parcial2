@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from config.db import db, app, ma
 from models.pasajero import Pasajero, PasajerosSchema
+from models.vehiculo import Vehiculo, VehiculosSchema
 
 ruta_pasajeros = Blueprint("ruta_pasajero",__name__)
 
@@ -29,6 +30,20 @@ def save():
     db.session.add(new_pasajero)
     db.session.commit()
     return "Datos guardados con éxito"
+
+@ruta_pasajeros.route('/Relacionpasajero', methods=['POST'])
+def dostabla():
+    datos = {}
+    resultado = db.session.query(Vehiculo,Pasajero). \
+        select_from(Vehiculo).join(Pasajero).all()
+    i=0
+    for vehiculo, pasajero in resultado:
+        i+=1
+        datos[i]={
+            'vehiculo':vehiculo.id,
+            'pasajero': pasajero.idvehiculo, 
+        }
+    return datos
 
 @ruta_pasajeros.route('/updatepasajero', methods=['PUT'])
 def Update():

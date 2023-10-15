@@ -4,7 +4,7 @@ class Vehiculo(db.Model):
     __tablename__ = "tblvehiculo"
 
     id = db.Column(db.Integer, primary_key=True)
-    placa = db.Column(db.Integer)
+    placa = db.Column(db.String(50))
     estado = db.Column(db.String(50))
     capacidad = db.Column(db.String(50))
 
