@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from config.db import db, app, ma
 from models.solicitud import Solicitud, SolicitudesSchema
+from models.pasajero import Pasajero, PasajerosSchema
 
 ruta_solicitud = Blueprint("ruta_solicitud",__name__)
 
@@ -19,7 +20,7 @@ def save():
     punto_origen = request.json['punto_origen']
     hora = request.json['hora']
     punto_final = request.json['punto_final']
-    new_solicitud = solicitud(
+    new_solicitud = Solicitud(
         idpasajero,
         punto_origen,
         hora,
@@ -30,15 +31,29 @@ def save():
     db.session.commit()
     return "Datos guardados con éxito"
 
+@ruta_solicitud.route('/Relacionsolicitud', methods=['POST'])
+def dostabla():
+    datos = {}
+    resultado = db.session.query(Pasajero,Solicitud). \
+        select_from(Pasajero).join(Solicitud).all()
+    i=0
+    for pasajero, solicitud in resultado:
+        i+=1
+        datos[i]={
+            'pasajero':pasajero.id,
+            'solicitud': solicitud.idpasajero, 
+        }
+    return datos
+
 @ruta_solicitud.route('/updatesolicitud', methods=['PUT'])
 def Update():
     id = request.json['id']
     idpasajero = request.json['idpasajero']
     punto_origen = request.json['punto_origen']
-    Hora = request.json['Hora']
+    Hora = request.json['hora']
     punto_final = request.json['punto_final']
     
-    solicitud = solicitud.query.get(id)
+    solicitud = Solicitud.query.get(id)
     if solicitud:
         print(solicitud)
         solicitud.idpasajero = idpasajero
@@ -53,7 +68,7 @@ def Update():
 
 @ruta_solicitud.route('/deletesolicitud/<id>', methods=['DELETE'])
 def eliminar(id):
-    solicitud = solicitud.query.get(id)
+    solicitud = Solicitud.query.get(id)
     db.session.delete(solicitud)
     db.session.commit()
     return jsonify(

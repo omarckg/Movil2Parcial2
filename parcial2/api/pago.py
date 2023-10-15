@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from config.db import db, app, ma
 from models.pago import Pago, PagosSchema
+from models.pasajero import Pasajero, PasajerosSchema
 
 ruta_pago = Blueprint("ruta_pago",__name__)
 
@@ -19,7 +20,7 @@ def save():
     fecha = request.json['fecha']
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
-    new_pago = pago(
+    new_pago = Pago(
         idpasajero,
         fecha,
         monto,
@@ -30,7 +31,21 @@ def save():
     db.session.commit()
     return "Datos guardados con éxito"
 
-@ruta_pago.route('/updatesolicitud', methods=['PUT'])
+@ruta_pago.route('/Relacionpago', methods=['POST'])
+def dostabla():
+    datos = {}
+    resultado = db.session.query(Pasajero,Pago). \
+        select_from(Pasajero).join(Pago).all()
+    i=0
+    for pasajero, pago in resultado:
+        i+=1
+        datos[i]={
+            'pasajero':pasajero.id,
+            'pago': pago.idpasajero, 
+        }
+    return datos
+
+@ruta_pago.route('/updatepago', methods=['PUT'])
 def Update():
     id = request.json['id']
     idpasajero = request.json['idpasajero']
@@ -38,7 +53,7 @@ def Update():
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
     
-    pago = pago.query.get(id)
+    pago = Pago.query.get(id)
     if pago:
         print(pago)
         pago.idpasajero = idpasajero
@@ -53,7 +68,7 @@ def Update():
 
 @ruta_pago.route('/deletepago/<id>', methods=['DELETE'])
 def eliminar(id):
-    pago = pago.query.get(id)
+    pago = Pago.query.get(id)
     db.session.delete(pago_schema)
     db.session.commit()
     return jsonify(
