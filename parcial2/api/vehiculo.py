@@ -15,9 +15,9 @@ def vehiculo():
 
 @ruta_Vehiculo.route("/saveVehiculo", methods=["POST"])
 def save():
-    placa = request.json[" placa"]
-    estado = request.json[" estado"]
-    capacidad = request.json[" capacidad"]
+    placa = request.json["placa"]
+    estado = request.json["estado"]
+    capacidad = request.json["capacidad"]
     new_Vehiculo = Vehiculo(
         placa,
         estado,
