@@ -31,19 +31,6 @@ def save():
     db.session.commit()
     return "Datos guardados con éxito"
 
-@ruta_solicitud.route('/Relacionsolicitud', methods=['POST'])
-def dostabla():
-    datos = {}
-    resultado = db.session.query(Pasajero,Solicitud). \
-        select_from(Pasajero).join(Solicitud).all()
-    i=0
-    for pasajero, solicitud in resultado:
-        i+=1
-        datos[i]={
-            'pasajero':pasajero.id,
-            'solicitud': solicitud.idpasajero, 
-        }
-    return datos
 
 @ruta_solicitud.route('/updatesolicitud', methods=['PUT'])
 def Update():
