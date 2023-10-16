@@ -15,73 +15,36 @@ app.register_blueprint(ruta_pago, url_prefix = '/api')
 app.register_blueprint(ruta_Reporte, url_prefix = '/api')
 
 
-@ruta_pago.route('/Relacionpago', methods=['POST'])
+
+@app.route('/')
+def index():
+    return "Hola Mundo"
+
+@app.route('/dostablas', methods=['POST'])
 def dostabla():
     datos = {}
-    resultado = db.session.query(Pasajero,Pago). \
-        select_from(Pasajero).join(Pago).all()
+    resultado = db.session.query(Cliente,Reserva). \
+        select_from(Cliente).join(Reserva).all()
     i=0
-    for pasajero, pago in resultado:
+    for clientes, reservas in resultado:
         i+=1
         datos[i]={
-            'pasajero':pasajero.id,
-            'pago': pago.idpasajero, 
+            'cliente':clientes.nombre,
+            'reserva': reservas.id, 
         }
     return datos
 
-@ruta_pasajeros.route('/Relacionpasajero', methods=['POST'])
-def dostabla():
+@app.route('/dostablas1', methods=['POST'])
+def dostabla1():
     datos = {}
-    resultado = db.session.query(Vehiculo,Pasajero). \
-        select_from(Vehiculo).join(Pasajero).all()
+    resultado = db.session.query(Aerolinea,Avion). \
+        select_from(Aerolinea).join(Avion).all()
     i=0
-    for vehiculo, pasajero in resultado:
+    for aerolinea,avion in resultado:
         i+=1
         datos[i]={
-            'vehiculo':vehiculo.id,
-            'pasajero': pasajero.idvehiculo, 
-        }
-    return datos
-
-@ruta_Viaje.route('/RelacionViaje', methods=['POST'])
-def dostabla():
-    datos = {}
-    resultado = db.session.query(Pasajero,Vehiculo,Viaje). \
-        select_from(Pasajero).join(Viaje).all()
-    i=0
-    for pasajero, vehiculo, viaje  in resultado:
-        i+=1
-        datos[i]={
-            'pasajero':pasajero.id,
-            'vehiculo': vehiculo.id, 
-        }
-    return datos
-
-@ruta_Reporte.route('/RelacionReporte', methods=['POST'])
-def dostabla():
-    datos = {}
-    resultado = db.session.query(Viaje,Pago,Reporte). \
-        select_from(Viaje).join(Reporte).all()
-    i=0
-    for viaje, pago, reporte  in resultado:
-        i+=1
-        datos[i]={
-            'pasajero':viaje.id,
-            'vehiculo': pago.id, 
-        }
-    return datos
-
-@ruta_solicitud.route('/Relacionsolicitud', methods=['POST'])
-def dostabla():
-    datos = {}
-    resultado = db.session.query(Pasajero,Solicitud). \
-        select_from(Pasajero).join(Solicitud).all()
-    i=0
-    for pasajero, solicitud in resultado:
-        i+=1
-        datos[i]={
-            'pasajero':pasajero.id,
-            'solicitud': solicitud.idpasajero, 
+            'aerolinea':aerolinea.nombre,
+            'avion':avion.id,
         }
     return datos
 

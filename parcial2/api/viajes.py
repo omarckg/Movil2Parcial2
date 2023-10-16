@@ -54,7 +54,19 @@ def Update():
     else:
         return "Error"
     
-
+@ruta_Viaje.route('/RelacionViaje', methods=['POST'])
+def dostabla():
+    datos = {}
+    resultado = db.session.query(Pasajero,Vehiculo,Viaje). \
+        select_from(Pasajero).join(Viaje).all()
+    i=0
+    for pasajero, vehiculo, viaje  in resultado:
+        i+=1
+        datos[i]={
+            'pasajero':pasajero.id,
+            'vehiculo': vehiculo.id, 
+        }
+    return datos
     
 @ruta_Viaje.route("/deleteviaje/<id>", methods=["DELETE"])
 def eliminar(id):
