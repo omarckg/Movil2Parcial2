@@ -64,7 +64,8 @@ def dostabla():
         i+=1
         datos[i]={
             'pasajero':pasajero.id,
-            'vehiculo': vehiculo.id, 
+            'vehiculo': vehiculo.id,
+            'viaje' :viaje.id,
         }
     return datos
     
