@@ -38,9 +38,9 @@ def Update():
     id = request.json["id"]
     idpasajero = request.json['idpasajero']
     idvehiculo = request.json['idvehiculo']
-    hora_inicio = request.json[" hora_inicio"]
-    hora_fin= request.json[" hora_fin"]
-    trayecto = request.json[" trayecto"]
+    hora_inicio = request.json["hora_inicio"]
+    hora_fin= request.json["hora_fin"]
+    trayecto = request.json["trayecto"]
     viaje = Viaje.query.get(id)
     if viaje:
         print(viaje)
