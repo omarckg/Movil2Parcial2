@@ -8,8 +8,8 @@ class Pasajero(db.Model):
     telefono = db.Column(db.String(50))
     ubicacion = db.Column(db.String(50))
 
-    def __init__(self,idvehiculo, nombre, telefono, ubicacion):
-        self.idvehiculo = idvehiculo
+    def __init__(self, nombre, telefono, ubicacion):
+        
         self.nombre = nombre
         self.telefono = telefono
         self.ubicacion = ubicacion
@@ -19,4 +19,4 @@ with app.app_context():
 
 class PasajerosSchema(ma.Schema):
     class Meta:
-        fields = ('id','idvehiculo', 'nombre', 'telefono','ubicacion')
+        fields = ('id', 'nombre', 'telefono','ubicacion')
