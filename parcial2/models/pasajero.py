@@ -4,7 +4,6 @@ class Pasajero(db.Model):
     __tablename__ = "tblpasajero"
 
     id = db.Column(db.Integer, primary_key=True)
-    idvehiculo = db.Column(db.Integer, db.ForeignKey('tblvehiculo.id'))
     nombre = db.Column(db.String(50))
     telefono = db.Column(db.String(50))
     ubicacion = db.Column(db.String(50))

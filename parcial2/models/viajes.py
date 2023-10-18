@@ -4,14 +4,14 @@ class Viaje(db.Model):
     __tablename__ = "tblviaje"
 
     id = db.Column(db.Integer, primary_key=True)
-    idpasajero = db.Column(db.Integer, db.ForeignKey('tblpasajero.id'))
+    idsolicitud = db.Column(db.Integer, db.ForeignKey('tblsolicitud.id'))
     idvehiculo = db.Column(db.Integer, db.ForeignKey('tblvehiculo.id'))
     Hora_inicio = db.Column(db.String(50))
     Hora_fin = db.Column(db.String(50))
     trayecto = db.Column(db.String(50))
 
-    def __init__(self,idpasajero, idvehiculo, hora_inicio, hora_fin, trayecto):
-        self.idpasajero = idpasajero
+    def __init__(self,idsolicitud, idvehiculo, hora_inicio, hora_fin, trayecto):
+        self.idsolicitud = idsolicitud
         self.idvehiculo = idvehiculo
         self.Hora_inicio = hora_inicio
         self.Hora_fin = hora_fin
@@ -22,4 +22,4 @@ with app.app_context():
 
 class ViajesSchema(ma.Schema):
     class Meta:
-        fields = ('id','idpasajero', 'idvehiculo', 'hora_inicio', 'hora_fin', 'trayecto')
+        fields = ('id','idsolicitud', 'idvehiculo', 'hora_inicio', 'hora_fin', 'trayecto')

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, json
 from config.db import db, app, ma
 from models.pago import Pago, PagosSchema
-from models.pasajero import Pasajero, PasajerosSchema
+from models.viajes import Viaje, ViajesSchema
 
 ruta_pago = Blueprint("ruta_pago",__name__)
 
@@ -16,12 +16,12 @@ def pago():
 
 @ruta_pago.route('/savepago', methods=['POST'])
 def save():
-    idpasajero = request.json['idpasajero']
+    idviaje = request.json['idviaje']
     fecha = request.json['fecha']
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
     new_pago = Pago(
-        idpasajero,
+        idviaje,
         fecha,
         monto,
         metodo_pago,
@@ -34,13 +34,13 @@ def save():
 @ruta_pago.route('/Relacionpago', methods=['POST'])
 def dostabla():
     datos = {}
-    resultado = db.session.query(Pasajero,Pago). \
-        select_from(Pasajero).join(Pago).all()
+    resultado = db.session.query(Viaje,Pago). \
+        select_from(Viaje).join(Pago).all()
     i=0
-    for pasajero, pago in resultado:
+    for viaje, pago in resultado:
         i+=1
         datos[i]={
-            'pasajero':pasajero.id,
+            'viaje':viaje.id,
             'pago': pago.idpasajero, 
         }
     return datos
@@ -48,7 +48,7 @@ def dostabla():
 @ruta_pago.route('/updatepago', methods=['PUT'])
 def Update():
     id = request.json['id']
-    idpasajero = request.json['idpasajero']
+    idviaje = request.json['idviaje']
     fecha = request.json['fecha']
     monto = request.json['monto']
     metodo_pago = request.json['metodo_pago']
@@ -56,7 +56,7 @@ def Update():
     pago = Pago.query.get(id)
     if pago:
         print(pago)
-        pago.idpasajero = idpasajero
+        pago.idviaje = idviaje
         pago.fecha = fecha
         pago.monto = monto
         pago.metodo_pago = metodo_pago
