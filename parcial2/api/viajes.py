@@ -17,13 +17,13 @@ def viaje():
 
 @ruta_Viaje.route("/saveViaje", methods=["POST"])
 def save():
-    idpasajero = request.json['idpasajero']
+    idsolicitud = request.json['idsolicitud']
     idvehiculo = request.json['idvehiculo']
     hora_inicio = request.json["hora_inicio"]
     Hora_fin= request.json["hora_fin"]
     trayecto = request.json["trayecto"]
     new_viaje= Viaje (
-        idpasajero,
+        idsolicitud,
         idvehiculo,
         hora_inicio,
         Hora_fin,
@@ -36,7 +36,7 @@ def save():
 @ruta_Viaje.route("/updateViaje", methods=["PUT"])
 def Update():
     id = request.json["id"]
-    idpasajero = request.json['idpasajero']
+    idsolicitud = request.json['idsolicitud']
     idvehiculo = request.json['idvehiculo']
     hora_inicio = request.json["hora_inicio"]
     hora_fin= request.json["hora_fin"]
@@ -44,7 +44,7 @@ def Update():
     viaje = Viaje.query.get(id)
     if viaje:
         print(viaje)
-        viaje.idpasajero = idpasajero
+        viaje.idsolicitud = idsolicitud
         viaje.idvehiculo = idvehiculo
         viaje.hora_inicio = hora_inicio
         viaje.hora_fin = hora_fin
