@@ -1,0 +1,5 @@
+http://omarfuentes.pythonanywhere.com/api/pasajeros
+http://omarfuentes.pythonanywhere.com/api/Vehiculos
+http://omarfuentes.pythonanywhere.com/api/Viajes
+http://omarfuentes.pythonanywhere.com/api/solicitudes
+http://omarfuentes.pythonanywhere.com/api/pagos
